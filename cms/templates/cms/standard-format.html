@@ -1,0 +1,166 @@
+{% extends 'cms/base.html' %}
+{% load static %}
+    {% block main %}
+    <main class="page-content">
+        <!-- Breadcrumbs-->
+        <section>
+          <div class="shell">
+            <div class="range">
+              <div class="cell-xs-12">
+                <ul class="breadcrumbs-custom">
+                  <li><a href="{% url 'index' %}">Home</a></li> <!-- Should be BreadCrumbs TODO -->
+                  <!--<li><a href="#">Post Formats</a></li>-->
+                  <li>{{ breadcrumb }}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Main content-->
+        <section class="section-bottom-30">
+          <div class="shell">
+            <div class="range">
+              <div class="cell-md-9">
+                <div class="section-top-28">
+                  <article class="post post-md post-single">
+                    <div class="post-tags">
+                      <ul class="list-tags">
+                        {% for tag in post_tags %}
+                        <li><a href="categories/{{ tag.category }}">{{ tag }}</a></li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                    <div class="post-header">
+                      <h1>{{ post_title }}</h1>
+                    </div>
+                    <div class="post-meta">
+                      <ul class="list-inline-dotted">
+                        <li><a href="#" class="text-uppercase">BY GRACE</a></li>
+                        <li><a href="#">
+                          <time datetime="2015-09-25">{{ post_created }}</time></a></li>
+                          <!--<li><a href="#" class="link link-iconed link-gray"><span class="icon icon-xs icon-gray fa-comment-o"></span><span>3</span></a></li>-->
+                      </ul>
+                    </div>
+                    <div class="post-body">
+                      {{ post_content | safe}}
+                    </div>
+                    <div class="post-footer">
+                      <!-- <h5>Share this Post</h5> -->
+                      {# include 'cms/social-media.html' #}
+                    </div>
+                  </article>
+                  <article class="comment comment-single">
+                    <div class="unit unit-sm-horizontal unit-spacing-md">
+                      <div class="unit-left">
+                        <figure class="comment-image"><img src="{% static 'cms/images/post-user-140x140.jpg' %}" alt="" width="140" height="140"/>
+                        </figure>
+                      </div>
+                      <div class="unit-body">
+                        <div class="comment-header">
+                          <h4>Written by<a href="#" class="link-text">grace</a></h4>
+                        </div>
+                        <div class="comment-body">
+                          <p>Thoughts spewing from a human head since 1986. A spewing outlet so that potentially useful things don't get lost. Kind of like storing that perfect piece of wood in the shed just in case it ever comes in handy.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                  <div class="nav-custom-variant-1 offset-top-50">
+                    {% if previous_posturl %}
+                    <div class="item-nav"><a href="{{ previous_posturl }}" class="btn btn-default btn-icon btn-icon-left"><span class="icon icon-sm material-icons-navigate_before"></span>Previous Post</a></div>
+                    {% endif %}
+                    {% if next_posturl %}
+                    <div class="item-nav"><a href="{{ next_posturl }}" class="btn btn-default btn-icon btn-icon-right"><span class="icon icon-sm material-icons-navigate_next"></span>Next Post</a></div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="cell-md-3 offset-top-60 offset-sm-top-70 offset-md-top-0">
+                <div class="range">
+                  <div class="cell-sm-6 cell-md-12">
+                    <ul class="aside-list">
+                      <li class="list-item">
+                        <ul class="list-bordered-xs">
+                          {% for obj, tags in zipped_list %}
+                          <li>
+                            <article class="post post-text">
+                              <div class="post-tags">
+                                <ul class="list-tags">
+                                  {% for tag in tags %}
+                                  <li><a href="{{ tag.category }}">{{ tag.word }}</a></li>
+                                  {% endfor %}
+                                </ul>
+                              </div>
+                              <div class="post-body">
+                                <h3><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h3>
+                              </div>
+                              <div class="post-meta"><a href="#" class="link link-gray">
+                                  <time datetime="2016-05-08">{{ obj.created }}</time></a></div>
+                            </article>
+                            </li>
+                            {% endfor %}
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="list-item"><a href="{{ banner_dsturl }}" class="banner"><img src="{{ banner_filename }}" alt="" width="250" height="364"/></a>
+                        <hr class="veil-sm reveal-lg-block">
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="cell-sm-6 cell-md-12 offset-top-50 offset-sm-top-0 offset-md-top-50">
+                    <ul class="aside-list">
+                      <li class="list-item">
+                      <!--<h4 class="h4-style-1">Social Media is No Longer an Option!</h4>-->
+                      {# include 'cms/social-media.html' #}
+                      </li>
+                      <li class="list-item offset-top-28">
+                        <hr class="hr-thin hr-mischka">
+                        <h4>Love the science?</h4>
+                        <!-- RD Mailform-->
+                        <form data-form-output="form-output-global" data-form-type="subcscribe" method="post" action="bat/rd-mailform.php" class="rd-mailform max-width-2 offset-top-17 text-left">
+                          <div class="form-group">
+                            <label for="subscribe-email" class="form-label">Enter your email</label>
+                            <input id="subscribe-email" type="email" name="email" data-constraints="@Email @Required" class="form-control">
+                          </div>
+                          <button type="submit" class="btn btn-default">Subscribe</button>
+                        </form>
+                        <hr>
+                      </li>
+                      <li class="list-item">
+                        <h4>Categories</h4>
+                        <ul class="list">
+                          {% for obj in all_categories %}
+                          <li><a href="categories/{{ obj.word }}">{{ obj.word }}</a></li>
+                          {% endfor %}
+                        </ul>
+                        <hr>
+                      </li>
+<!--
+                      <li class="list-item">
+                        <h4>Archive</h4>
+                        <ul class="list">
+                          <li><a href="#">May 2016</a></li>
+                          <li><a href="#">April 2016</a></li>
+                          <li><a href="#">March 2016</a></li>
+                          <li><a href="#">February 2016</a></li>
+                          <li><a href="#">January 2016</a></li>
+                          <li><a href="#">December 2015</a></li>
+                          <li><a href="#">November 2015</a></li>
+                          <li><a href="#">October 2015</a></li>
+                          <li><a href="#">September 2015</a></li>
+                        </ul>
+                        </li>
+                        -->
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        </main>
+{% endblock %}

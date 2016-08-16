@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="wide wow-animation">
+  <head>
+    <!-- Site Title-->
+    <title>Home</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <!-- Stylesheets-->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto+Mono:300,400,500,700%7CRoboto:300,300italic">
+    <link rel="stylesheet" href="{% static 'cms/css/style.css' %}">
+    {% include "cms/style.html" %} 
+		<!--[if lt IE 10]>
+    <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+    <script src="js/html5shiv.min.js"></script>
+		<![endif]-->
+  </head>
+  <body>
+    <!-- Page-->
+    <div class="page">
+      <!-- Page Header-->
+      <header class="page-head">
+        <!-- RD Navbar-->
+        <div class="rd-navbar-wrap">
+          <nav data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fullwidth" data-lg-layout="rd-navbar-fullwidth" data-lg-device-layout="rd-navbar-fullwidth" data-stick-up-clone="false" data-md-stick-up-offset="235px" data-lg-stick-up-offset="165px" class="rd-navbar rd-navbar-fullwidth-default">
+            <div class="rd-navbar-inner">
+              <div class="rd-navbar-aside">
+                <div class="rd-navbar-aside-content">
+                  <p class="rd-navbar-fixed--hidden">#radishpower #nolabels @pixelsio — gracewoo.com</p>
+                  <!-- Responsive-tabs-->
+                  <ul class="toggle-tabs">
+                    <!-- [[include 'cms/account.html']] -->
+                  </ul>
+                </div>
+              </div>
+              <!-- RD Navbar Panel-->
+              <div class="rd-navbar-panel">
+                <!-- RD Navbar Toggle-->
+                <button data-rd-navbar-toggle=".rd-navbar-nav-wrap" class="rd-navbar-toggle"><span></span></button>
+                <!-- RD Navbar Brand--><a href="index.html" class="rd-navbar-brand"><span class="brand-name"><img src="{{ logo_filename }}" alt="" width="212" height="37"/></span><span class="brand-slogan">updated daily</span></a>
+              </div>
+              <div class="rd-navbar-nav-wrap">
+                <!-- RD Search-->
+                <!--{% include 'cms/search.html' %}-->
+                <!-- RD Navbar Nav-->
+                <ul class="rd-navbar-nav">
+                  <li class="active"><a href="{% url 'index' %}">Home</a>
+                    <!-- RD Navbar Dropdown-->
+                    <ul class="rd-navbar-dropdown">
+                      <li><a href="http://pixels.io">Pixels.IO</a>
+                      </li>
+                      <li><a href="http://www.about.me/gracewoo">CV</a>
+                      </li>
+                      <li><a href="#">Media</a>
+                      <ul class="rd-navbar-dropdown">
+                          {% for mediaurl in all_mediaurls %}
+                          <li><a href="{{ mediaurl.urldst }}">{{ mediaurl.name }}</a></li>
+                          {% endfor %}
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a href="{% url 'about' %}">About</a>
+                  </li>
+                  <li><a href="#">Categories</a>
+                    <!-- RD Navbar Dropdown-->
+                    <ul class="rd-navbar-dropdown">
+                      {% for category in all_categories %}
+                      <li><a href="categories/{{ category.word }}">{{ category.word }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </li>
+                  <li><a href="{% url 'contact' %}">Contact</a>
+                  </li>
+                </ul>
+                <!-- RD Navbar Links-->
+                <div class="rd-navbar-bottom-panel">
+                  <ul class="list-inline list-inline-xs">
+                    {# include 'cms/social-media.html' #}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <!-- Page Content-->
+      
+      {% block main %}
+      
+      {% endblock %}
+      
+      <!-- Page Footer-->
+      <footer class="page-foot page-foot-default">
+        <div class="shell">
+          <div class="custom-row-1">
+            <div class="object-right">
+              {# include 'cms/social-media.html' #}
+            </div>
+            <div class="object-left">
+              <p class="rights"><span id="copyright-year"></span>&nbsp;(c)&nbsp;<a href="index.html" class="brand">Grace Woo.</a><span class="reveal-block reveal-xs-inline"> All Rights Reserved<span class="spacer">&#8226;</span><a href="privacy.html" class="link-gray">Privacy Policy</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <!-- Global Mailform Output-->
+    <div id="form-output-global" class="snackbars"></div>
+    <!-- PhotoSwipe Gallery-->
+    <div tabindex="-1" role="dialog" aria-hidden="true" class="pswp">
+      <div class="pswp__bg"></div>
+      <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+          <div class="pswp__item"></div>
+          <div class="pswp__item"></div>
+          <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+          <div class="pswp__top-bar">
+            <div class="pswp__counter"></div>
+            <button title="Close (Esc)" class="pswp__button pswp__button--close"></button>
+            <button title="Share" class="pswp__button pswp__button--share"></button>
+            <button title="Toggle fullscreen" class="pswp__button pswp__button--fs"></button>
+            <button title="Zoom in/out" class="pswp__button pswp__button--zoom"></button>
+            <div class="pswp__preloader">
+              <div class="pswp__preloader__icn">
+                <div class="pswp__preloader__cut">
+                  <div class="pswp__preloader__donut"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+            <div class="pswp__share-tooltip"></div>
+          </div>
+          <button title="Previous (arrow left)" class="pswp__button pswp__button--arrow--left"></button>
+          <button title="Next (arrow right)" class="pswp__button pswp__button--arrow--right"></button>
+          <div class="pswp__caption">
+            <div class="pswp__caption__cent"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascript-->
+    <script src="{% static 'cms/js/core.min.js' %}"></script>
+    <script src="{% static 'cms/js/script.js' %}"></script>
+  </body>
+</html>

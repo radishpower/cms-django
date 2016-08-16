@@ -1,0 +1,221 @@
+{% extends 'cms/base.html' %}
+{% load static %}
+    {% block main %}
+      <main class="page-content">
+        <!-- Main content-->
+        <section class="section-50">
+          <div class="shell">
+            <div class="range">
+              <div class="cell-md-9">
+                <div class="range range-sm-reverse">
+                  <div class="cell-sm-8">
+                    <article class="post post-vertical post-lg">
+                      <figure><img src="{{ post_imgurl }}" alt="" width="550" height="429"/>
+                      </figure>
+                      <div class="post-tags">
+                        <ul class="list-tags">
+                          <li><a href="categories/{{ post_tags.0.category }}">{{ post_tags.0.category }}</a></li>
+                        </ul>
+                      </div>
+                      <div class="post-body">
+                        <p class="h1"><a href="{{ post_url }}">{{ post_title }}</a></p>
+                        <p>{{ post_description }} ...</p>
+                      </div>
+                      <div class="post-meta">
+                        <ul class="list-inline-dotted">
+                          <li><a href="#">BY GRACE</a></li>
+                          <li><a href="#">
+                              <time datetime="2016-05-03">{{ post_date }}</time></a></li>
+                          <!--<li><a href="standard-format.html" class="link link-iconed link-gray"><span class="icon icon-xs icon-gray fa-comment-o"></span><span>0</span></a></li>-->
+                        </ul>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="cell-sm-4 offset-top-50 offset-sm-top-0">
+                    {% for obj, imobj, tags in zipped_living_posts %}
+                    <article class="post post-sm post-vertical">
+                    <figure><img src="{{ imobj }}" alt="" width="250" height="195"/>
+                      </figure>
+                      <div class="post-tags">
+                        <ul class="list-tags">
+                          <li><a href="categories/{{ tags.0.category }}">{{ tags.0.category }}</a></li>
+                        </ul>
+                      </div>
+                      <div class="post-body">
+                        <h3><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h3>
+                      </div>
+                      <div class="post-meta"><a href="#" class="link link-gray">
+                          <time datetime="2016-05-03">{{ obj.created }}</time></a></div>
+                      </article>
+                      {% endfor %}
+                  </div>
+                </div>
+                <hr>
+                <div class="range">
+                  {% for obj, imobj, tags in zipped_scitech_posts %}
+                  <div class="cell-sm-4 offset-top-50 offset-sm-top-0">
+                    <article class="post post-image post-dark">
+                      <figure><img src="{{ imobj }}" alt="" width="250" height="195"/>
+                      </figure>
+                      <div class="caption">
+                        <div class="post-body">
+                          <div class="post-tags">
+                            <ul class="list-tags">
+                              {% for tag in tags %}
+                              <li><a href="categories-1.html">{{ tag }}</a></li>
+                              {% endfor %}
+                            </ul>
+                          </div>
+                          <div class="post-header">
+                            <h3><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h3>
+                          </div>
+                        </div>
+                        <div class="post-meta"><a href="#" class="link link-gray">
+                            <time datetime="2016-05-03">{{ obj.created }}</time></a></div>
+                      </div>
+                    </article>
+                  </div>
+                  {% endfor %}
+                </div>
+                <hr>
+                <div class="range">
+                  <div class="cell-xs-12">
+                    <ul class="list-bordered-bottom list-bordered-bottom-md">
+                      {% for obj, imobj, tags in zipped_pioenabled_posts %} 
+                      <li>
+                        <article class="post post-md post-horizontal">
+                          <div class="unit unit-sm-horizontal unit-top unit-spacing-md">
+                            <div class="unit-left">
+                              <figure><img src="{{ imobj }}" alt="" width=350 height=274/>
+                              </figure>
+                            </div>
+                            <div class="unit-body">
+                              <div class="post-tags">
+                                <ul class="list-tags">
+                                  {% for tag in tags %}
+                                  <li><a href="categories/{{ tag.category }}">{{ tag.word }}</a></li>
+                                  {% endfor %}
+                                </ul>
+                              </div>
+                              <div class="post-header">
+                                <h2><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h2>
+                              </div>
+                              <div class="post-body">
+                                <p>{{ obj.description }} ...</p>
+                              </div>
+                              <div class="post-meta">
+                                <ul class="list-inline-dotted">
+                                  <li><a href="#" class="text-uppercase">BY GRACE</a></li>
+                                  <li><a href="#">
+                                      <time datetime="2016-05-20">{{ obj.created }}</time></a></li>
+                                  <!--<li><a href="standard-format.html" class="link link-iconed link-gray"><span class="icon icon-xs icon-gray fa-comment-o"></span><span>0</span></a></li>-->
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </article>
+                      </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                  <!--
+                  <div class="cell-xs-12 offset-top-34">
+                    <ul class="pagination-custom">
+                      <li class="active"><a href="#">1</a></li>
+                      <li><a href="#">2</a></li>
+                      <li class="dots"><span></span></li>
+                      <li><a href="#">6</a></li>
+                      <li><a href="#">Next</a></li>
+                    </ul>
+                  </div>-->
+                </div>
+              </div>
+              <div class="cell-md-3 offset-top-60 offset-sm-top-70 offset-md-top-0">
+                <div class="range">
+                  <div class="cell-sm-6 cell-md-12">
+                    <ul class="aside-list">
+                      <li class="list-item">
+                        <ul class="list-bordered-xs">
+                          {% for obj, imobj, tags in zipped_latest_posts %}
+                          <li>
+                            <article class="post post-text">
+                              <div class="post-tags">
+                                <ul class="list-tags">
+                                  {% for tag in tags %}
+                                  <li><a href="categories/{{ tag.category }}">{{ tag }}</a></li>
+                                  {% endfor %}
+                                </ul>
+                              </div>
+                              <div class="post-body">
+                                <h3><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h3>
+                              </div>
+                              <div class="post-meta"><a href="#" class="link link-gray">
+                                  <time datetime="2016-05-03">{{ obj.created }}</time></a></div>
+                            </article>
+                          </li>
+                          {% endfor %}
+                        </ul>
+                      </li>
+                      <li class="list-item"><a href="{{ banner_dsturl }}" class="banner"><img src="{{ banner_filename }}" alt="" width="250" height="364"/></a>
+                        <hr class="veil-sm reveal-lg-block">
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="cell-sm-6 cell-md-12 offset-top-50 offset-sm-top-0 offset-md-top-50">
+                    <ul class="aside-list">
+                      <li class="list-item">
+                        <h4 class="h4-style-1">Discover Scientific News Across Social Media!</h4>
+                        <ul class="list-inline list-inline-xxs">
+                          <li><a href="#" class="icon icon-xs icon-dark fa-facebook"></a></li>
+                          <li><a href="#" class="icon icon-xs icon-dark fa-twitter"></a></li>
+                          <li><a href="#" class="icon icon-xs icon-dark fa-google-plus"></a></li>
+                          <li><a href="#" class="icon icon-xs icon-dark fa-linkedin"></a></li>
+                          <li><a href="#" class="icon icon-xs icon-dark fa-pinterest"></a></li>
+                        </ul>
+                      </li>
+                      <li class="list-item offset-top-28">
+                        <hr class="hr-thin hr-mischka">
+                        <h4>Love the science?</h4>
+                        <!-- RD Mailform-->
+                        <form data-form-output="form-output-global" data-form-type="subcscribe" method="post" action="bat/rd-mailform.php" class="rd-mailform max-width-2 offset-top-17 text-left">
+                          <div class="form-group">
+                            <label for="subscribe-email" class="form-label">Enter your email</label>
+                            <input id="subscribe-email" type="email" name="email" data-constraints="@Email @Required" class="form-control">
+                          </div>
+                          <button type="submit" class="btn btn-default">Subscribe</button>
+                        </form>
+                        <hr>
+                      </li>
+                      <li class="list-item">
+                      <h4>Categories</h4>
+                        <ul class="list">
+                          {% for obj in all_tags %}
+                          <li><a href="categories/{{ obj.category }}">{{ obj.word }}</a></li>
+                          {% endfor %}
+                        </ul>
+                        <hr>
+                      </li>
+<!--                      <li class="list-item">
+                        <h4>Archive</h4>
+                        <ul class="list">
+                          <li><a href="#">May 2016</a></li>
+                          <li><a href="#">April 2016</a></li>
+                          <li><a href="#">March 2016</a></li>
+                          <li><a href="#">February 2016</a></li>
+                          <li><a href="#">January 2016</a></li>
+                          <li><a href="#">December 2015</a></li>
+                          <li><a href="#">November 2015</a></li>
+                          <li><a href="#">October 2015</a></li>
+                          <li><a href="#">September 2015</a></li>
+                        </ul>
+                        </li> -->
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        </main>
+        {% endblock %}
